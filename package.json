@@ -28,5 +28,9 @@
     "require-dir": "^0.1.0",
     "svn-info": "^0.2.1",
     "svn-project-root": "^0.1.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/yasinkocak/gulp-svn/issues"
+  },
+  "devDependencies": {}
 }
