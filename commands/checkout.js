@@ -1,6 +1,7 @@
 'use strict';
 
-var exec = require('child_process').exec;
+var exec = require('child_process').exec,
+    gutil = require('gulp-util');
 
 module.exports = function (repo, path, options, cb)
 {
@@ -12,8 +13,8 @@ module.exports = function (repo, path, options, cb)
     if(!cb || typeof cb !== 'function') cb = function() {};
     if(!options) options = {};
     if(!repo) throw new Error('gulp-svn: Repository is required svn.checkout("https://svn.example.com/something/")');
+    if(!options.cwd) options.cwd = process.cwd();
     if(!options.args) options.args = ' ';
-    if(!path) path = process.cwd();
 
     var cmd = 'svn checkout ' + repo + ' ' + path + ' ' + options.args;
 
@@ -21,8 +22,9 @@ module.exports = function (repo, path, options, cb)
         cmd += ' --username '+ options.username + ' --password ' + options.password;
     }
 
-    exec(cmd, function(err) {
-        if(err) return cb(err);
-        cb(null);
+    return exec(cmd, {cwd: options.cwd}, function(err, stdout, stderr){
+        if (err) return cb(err);
+        if (!options.quiet) gutil.log(stdout, stderr);
+        cb();
     });
 };

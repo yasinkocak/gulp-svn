@@ -10,11 +10,10 @@ module.exports = function(tag, message, options, cb) {
     }
 
     if(!cb || typeof cb !== 'function') cb = function() {};
+    if(!options) options = {};
     if(!tag) return cb(new Error('Tag must be defined'));
     if(!message) return cb(new Error('Message must be defined'));
-
-    if(!options) options = {};
-
+    if(!options.cwd) options.cwd = process.cwd();
     if(!options.args) options.args = ' ';
 
     var projectRoot;
@@ -29,7 +28,6 @@ module.exports = function(tag, message, options, cb) {
     }
 
     var from = projectRoot = projectRoot.replace(/\/$/, '');
-
     var to = projectRoot + '/tags/' + tag;
 
     var cmd = 'svn cp "' + from + '" "' + to + '" -m "' + message + '" "' + options.args;
@@ -38,8 +36,9 @@ module.exports = function(tag, message, options, cb) {
         cmd += ' --username '+ options.username + ' --password ' + options.password;
     }
 
-    exec(cmd, function(err, stdout, stderr) {
-        if(err) return cb(err);
-        cb(null);
+    return exec(cmd, {cwd: options.cwd}, function(err, stdout, stderr){
+        if (err) return cb(err);
+        if (!options.quiet) gutil.log(stdout, stderr);
+        cb();
     });
 };
