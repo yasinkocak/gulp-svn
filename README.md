@@ -1,5 +1,5 @@
 #gulp-svn
-
+[![NPM version](https://badge.fury.io/js/gulp-svn.png)](http://badge.fury.io/js/gulp-svn)
 <table>
 <tr>
 <td>Package</td><td>gulp-svn</td>

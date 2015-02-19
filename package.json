@@ -1,6 +1,6 @@
 {
   "name": "gulp-svn",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SVN plugin for gulp (gulpjs.com)",
   "homepage": "https://github.com/yasinkocak/gulp-svn",
   "repository": {
