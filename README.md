@@ -21,3 +21,38 @@
 ## Usage
 ### Install
     npm install gulp-svn --save
+
+## Example
+```javascript
+    var gulp = require('gulp');
+    var svn = require('gulp-svn');
+
+    // Run svn add
+    gulp.task('add', function(){
+        return svn.add('/file.js');
+    }
+
+    // Run svn add with error
+    gulp.task('add', function(){
+        return svn.add('./file.js', function(err){
+            if(err) throw err;
+        });
+    });
+
+    // Run svn add with options
+    gulp.task('add', function(){
+        return svn.add('./file.js', {args: '--force'}, function(err){
+            if(err) throw err;
+        });
+    });
+
+    // Run svn commit
+    gulp.task('commit', function(){
+        return svn.commit('Initial commit', function(err){
+            if(err) throw err;
+        });
+    });
+
+    // Run gulp
+    gulp.task('default',['add', 'commit']);
+```
