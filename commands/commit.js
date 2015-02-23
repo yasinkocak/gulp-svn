@@ -16,7 +16,7 @@ module.exports = function (message, options, cb) {
     if(!options.cwd) options.cwd = process.cwd();
     if(!options.args) options.args = ' ';
 
-    var cmd = 'svn commit -m ' + message + ' ' + options.args;
+    var cmd = 'svn commit -m "' + message + '" ' + options.args;
 
     if(options.username && options.password) {
         cmd += ' --username '+ options.username + ' --password ' + options.password;
