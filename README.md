@@ -53,6 +53,15 @@ gulp.task('commit', function(){
     });
 });
 
+// Run svn tag
+gulp.task('tag', function(){
+    svn.tag('version-0.0.1', 'Tagged commit', function (err){
+        if(err) {
+            throw err;
+        }
+    });
+});
+
 // Run gulp
 gulp.task('default',['add', 'commit']);
 ```
