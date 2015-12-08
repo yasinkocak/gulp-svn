@@ -6,7 +6,7 @@
 </tr>
 <tr>
 <td>Description</td>
-<td>SVN plugin for Gulp (gulpjs.com)</td>
+<td>SVN plugin for Gulp</td>
 </tr>
 <tr>
 <td>Node Version</td>
