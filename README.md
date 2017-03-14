@@ -24,44 +24,60 @@
 
 ## Example
 ```javascript
-var gulp = require('gulp');
-var svn = require('gulp-svn');
+var gulp = require('gulp')
+var svn = require('gulp-svn')
 
 // Run svn add
-gulp.task('add', function(){
-    return svn.add('/file.js');
+gulp.task('add', () => {
+    return svn.add('/file.js')
 }
 
 // Run svn add with error
-gulp.task('add', function(){
-    return svn.add('./file.js', function(err){
-        if(err) throw err;
-    });
-});
+gulp.task('add', () => {
+    return svn.add('./file.js', (err) => {
+        if(err) throw err
+    })
+})
 
 // Run svn add with options
-gulp.task('add', function(){
-    return svn.add('./file.js', {args: '--force'}, function(err){
-        if(err) throw err;
-    });
-});
+gulp.task('add', () => {
+    return svn.add('./file.js', {args: '--force'}, (err) => {
+        if(err) throw err
+    })
+})
+
+// Run svn revert some file
+gulp.task('revert-file', () => {
+    return svn.revert('somefile.js', (err) => {
+        if(err) throw err
+    })
+})
+
+// Run svn revert with some directory recursively
+gulp.task('revert', () => {
+    return svn.revert('directory', { args: '-R' }, (err) => {
+        if(err) throw err
+    })
+})
 
 // Run svn commit
-gulp.task('commit', function(){
-    return svn.commit('Initial commit', function(err){
-        if(err) throw err;
-    });
-});
+gulp.task('commit', () => {
+    return svn.commit('Initial commit', (err) => {
+        if(err) throw err
+    })
+})
 
 // Run svn tag
-gulp.task('tag', function(){
-    svn.tag('version-0.0.1', 'Tagged commit', function (err){
+gulp.task('tag', () => {
+    svn.tag('version-0.0.1', 'Tagged commit', (err) => {
         if(err) {
-            throw err;
+            throw err
         }
-    });
-});
+    })
+})
 
 // Run gulp
-gulp.task('default',['add', 'commit']);
+gulp.task('default',['add', 'commit'])
 ```
+
+Synchronous tasks are also available, suffixed with 'Sync'. For instance use the task name, `moveSync` instead of `move`.
